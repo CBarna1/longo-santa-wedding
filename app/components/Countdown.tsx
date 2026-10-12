@@ -21,7 +21,7 @@ export default function Countdown() {
   if (!left) return <div className="h-[8.25rem]" aria-hidden />;
 
   if (left.done) {
-    return <p className="flex h-[8.25rem] items-center justify-center font-serif text-4xl italic text-paper">Just married!</p>;
+    return <p className="flex h-[8.25rem] items-center justify-center font-serif text-4xl italic text-paper text-glow">Just married!</p>;
   }
 
   const units = [
@@ -32,7 +32,7 @@ export default function Countdown() {
 
   return (
     <div className="h-[8.25rem]">
-      <p className="mb-5 text-center text-xs uppercase tracking-[0.3em] text-mauve-light">Counting down</p>
+      <p className="mb-5 text-center text-glow text-xs font-semibold uppercase tracking-[0.3em] text-paper">Counting down</p>
       <div className="mx-auto flex max-w-sm justify-center gap-2 sm:gap-6" role="timer" aria-label="Time until the wedding">
         {units.map((u) => (
           // w-20 on small phones: three w-24 boxes don't fit a 320px screen.

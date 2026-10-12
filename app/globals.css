@@ -9,3 +9,8 @@ html {
 ::selection {
   background: #e6dad8;
 }
+
+/* Soft dark halo so light text stays legible over the background photo. */
+.text-glow {
+  text-shadow: 0 1px 2px rgb(39 20 44 / 0.7), 0 2px 16px rgb(39 20 44 / 0.6);
+}

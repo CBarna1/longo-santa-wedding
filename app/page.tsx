@@ -17,8 +17,8 @@ import {
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-8 text-center">
-      <Sprig className="mx-auto mb-4 h-4 w-20 text-mauve" />
-      <h2 className="font-serif text-4xl text-paper sm:text-5xl">{children}</h2>
+      <Sprig className="mx-auto mb-4 h-4 w-20 text-mauve-light" />
+      <h2 className="text-glow font-serif text-4xl font-medium text-paper sm:text-5xl">{children}</h2>
     </div>
   );
 }
@@ -26,44 +26,45 @@ function SectionTitle({ children }: { children: React.ReactNode }) {
 export default function Home() {
   return (
     <main className="relative isolate min-h-screen">
-      {/* Full-page photo background: fixed behind everything, slowly drifting. Pre-blurred file. */}
+      {/* Full-page photo background: fixed behind everything, slowly drifting. Lightly pre-blurred file,
+          served at full size because it is scaled to cover the screen height on phones. */}
       <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden bg-ink">
         <Image
           src="/couple-blur.jpg"
           alt=""
           fill
           priority
-          sizes="100vw"
+          unoptimized
           className="animate-drift object-cover object-[50%_15%] motion-reduce:animate-none"
         />
-        <div className="absolute inset-0 bg-ink/60" />
+        <div className="absolute inset-0 bg-ink/40" />
       </div>
 
       {/* Hero */}
-      <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
-        <LeafArch className="h-20 w-40 text-mauve sm:h-24 sm:w-48" />
-        <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-paper min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
+      <section className="text-glow flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
+        <LeafArch className="h-20 w-40 text-mauve-light sm:h-24 sm:w-48" />
+        <h1 className="mt-6 font-serif text-4xl font-medium leading-[0.95] text-paper min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
           <span className="block whitespace-nowrap">
             {COUPLE.first} {COUPLE.firstSurname}
           </span>
-          <span className="my-3 block text-3xl italic text-mauve sm:text-4xl">&amp;</span>
+          <span className="my-3 block text-3xl italic text-mauve-light sm:text-4xl">&amp;</span>
           <span className="block whitespace-nowrap">
             {COUPLE.second} {COUPLE.secondSurname}
           </span>
         </h1>
-        <p className="mt-8 max-w-md font-serif text-xl italic leading-relaxed text-paper/90 sm:text-2xl">
+        <p className="mt-8 max-w-md font-serif text-xl font-medium italic leading-relaxed text-paper sm:text-2xl">
           Invite you to share in the joy of their wedding day celebration as they begin this beautiful
           chapter together.
         </p>
-        <p className="mt-8 text-xs uppercase tracking-[0.3em] text-paper/85 sm:text-sm">
+        <p className="mt-8 text-xs font-semibold uppercase tracking-[0.3em] text-paper sm:text-sm">
           {WEDDING_DATE_LABEL} · {CITY}
         </p>
-        <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/80">
+        <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper sm:text-base">
           This special occasion is reserved for adults only, and the couple kindly request your understanding.
         </p>
         <a
           href="#rsvp"
-          className="mt-10 inline-block rounded-full bg-paper px-9 py-3 text-sm uppercase tracking-[0.25em] text-plum transition hover:-translate-y-0.5 hover:bg-mauve-light"
+          className="mt-10 inline-block rounded-full bg-paper px-9 py-3 text-sm font-semibold uppercase shadow-lg [text-shadow:none] tracking-[0.25em] text-plum transition hover:-translate-y-0.5 hover:bg-mauve-light"
         >
           RSVP
         </a>
@@ -121,7 +122,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-paper/85">
+      <footer className="text-glow px-4 pb-12 text-center font-serif text-lg font-medium italic text-paper">
         {COUPLE_FULL} · {WEDDING_DATE_NUMERIC}
       </footer>
     </main>
