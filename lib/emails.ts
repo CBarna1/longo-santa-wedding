@@ -7,10 +7,10 @@
  */
 import { CITY, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, WEDDING_DATE_SHORT, type EventKey } from "./event.ts";
 
-const SAGE = "#7d9471";
-const SAGE_LIGHT = "#cdd8c6";
-const PAPER = "#f4f6f1";
-const INK = "#2f3b2f";
+const PLUM = "#5b2a52";
+const MAUVE_LIGHT = "#e6dad8";
+const PAPER = "#f9f6f1";
+const INK = "#27142c";
 const SERIF = "'Cormorant Garamond', Georgia, 'Times New Roman', Times, serif";
 const SANS = "-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 const COUPLE_HTML = COUPLE_FULL.replace("&", "&amp;");
@@ -42,12 +42,12 @@ function guestLayout(heading: string, body: string): string {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:${PAPER};">
     <tr>
       <td align="center" style="padding:40px 16px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#ffffff;border:1px solid ${SAGE_LIGHT};border-radius:12px;">
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#ffffff;border:1px solid ${MAUVE_LIGHT};border-radius:12px;">
           <tr>
             <td align="center" style="padding:40px 32px 8px 32px;">
-              <p style="margin:0;font-family:${SANS};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${SAGE};">${COUPLE_HTML}</p>
+              <p style="margin:0;font-family:${SANS};font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${PLUM};">${COUPLE_HTML}</p>
               <h1 style="margin:16px 0 0 0;font-family:${SERIF};font-size:30px;font-weight:normal;line-height:1.3;color:${INK};">${heading}</h1>
-              <div style="width:48px;height:1px;background-color:${SAGE};margin:24px auto 0 auto;line-height:1px;font-size:1px;">&nbsp;</div>
+              <div style="width:48px;height:1px;background-color:${PLUM};margin:24px auto 0 auto;line-height:1px;font-size:1px;">&nbsp;</div>
             </td>
           </tr>
           <tr>
@@ -56,7 +56,7 @@ function guestLayout(heading: string, body: string): string {
             </td>
           </tr>
         </table>
-        <p style="margin:24px 0 0 0;font-family:${SANS};font-size:12px;letter-spacing:1px;color:#7a857a;">${WEDDING_DATE_LABEL} · ${CITY}</p>
+        <p style="margin:24px 0 0 0;font-family:${SANS};font-size:12px;letter-spacing:1px;color:#847384;">${WEDDING_DATE_LABEL} · ${CITY}</p>
       </td>
     </tr>
   </table>
@@ -64,7 +64,7 @@ function guestLayout(heading: string, body: string): string {
 </html>`;
 }
 
-const signOff = `<p style="margin:24px 0 0 0;">With love,<br /><span style="font-size:24px;color:${SAGE};">${COUPLE_HTML}</span></p>`;
+const signOff = `<p style="margin:24px 0 0 0;">With love,<br /><span style="font-size:24px;color:${PLUM};">${COUPLE_HTML}</span></p>`;
 
 /** Confirmation for guests who accepted; lists only the events they chose. */
 export function attendingEmail(
@@ -74,7 +74,7 @@ export function attendingEmail(
   events: EventChoice
 ): string {
   const label = (text: string) =>
-    `<td style="padding:8px 0;font-family:${SANS};font-size:13px;color:${SAGE};width:90px;vertical-align:top;font-weight:600;">${text}</td>`;
+    `<td style="padding:8px 0;font-family:${SANS};font-size:13px;color:${PLUM};width:90px;vertical-align:top;font-weight:600;">${text}</td>`;
   const value = (html: string) =>
     `<td style="padding:8px 0;font-family:${SERIF};font-size:17px;color:${INK};vertical-align:top;">${html}</td>`;
 
@@ -88,7 +88,7 @@ export function attendingEmail(
     "We can't wait to celebrate with you!",
     `<p style="margin:0 0 16px 0;">Dear ${escapeHtml(name)},</p>
     <p style="margin:0 0 16px 0;">Thank you so much for your RSVP. It means the world to us that you'll be with us on ${WEDDING_DATE_SHORT}. Here is what we have for you:</p>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px 0;background-color:${PAPER};border-left:3px solid ${SAGE};border-radius:6px;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:8px 0 24px 0;background-color:${PAPER};border-left:3px solid ${PLUM};border-radius:6px;">
       <tr><td style="padding:12px 20px;">
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
           ${eventRows}
@@ -142,7 +142,7 @@ export function notifyCoupleEmail({
   const none = `<span style="color:#aaaaaa;">None</span>`;
 
   const status = attending
-    ? `<span style="display:inline-block;padding:2px 10px;border-radius:999px;background-color:#e6efe2;color:#4d6343;font-weight:600;">Attending</span>`
+    ? `<span style="display:inline-block;padding:2px 10px;border-radius:999px;background-color:#efe5ec;color:#5b2a52;font-weight:600;">Attending</span>`
     : `<span style="display:inline-block;padding:2px 10px;border-radius:999px;background-color:#f3e9e7;color:#9a5a50;font-weight:600;">Declined</span>`;
 
   const safeEmail = escapeHtml(email);
@@ -152,7 +152,7 @@ export function notifyCoupleEmail({
 
   const rows = [
     row("Name", escapeHtml(name)),
-    row("Email", `<a href="mailto:${safeEmail}" style="color:${SAGE};text-decoration:none;">${safeEmail}</a>`),
+    row("Email", `<a href="mailto:${safeEmail}" style="color:${PLUM};text-decoration:none;">${safeEmail}</a>`),
     row("Response", status),
     eventRows,
     attending ? row("Guests", String(guestCount)) : "",
@@ -170,7 +170,7 @@ export function notifyCoupleEmail({
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;background-color:#ffffff;border-radius:8px;">
           <tr>
             <td style="padding:28px 28px 8px 28px;font-family:${SANS};">
-              <p style="margin:0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${SAGE};font-weight:600;">New RSVP · ${COUPLE_HTML}</p>
+              <p style="margin:0;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${PLUM};font-weight:600;">New RSVP · ${COUPLE_HTML}</p>
               <h1 style="margin:6px 0 0 0;font-size:20px;font-weight:600;color:${INK};">${escapeHtml(name)} ${attending ? "is coming 🎉" : "can't make it"}</h1>
             </td>
           </tr>

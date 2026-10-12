@@ -6,7 +6,7 @@ import { COUPLE, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, CITY, WEDD
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-8 text-center">
-      <Sprig className="mx-auto mb-4 h-4 w-20 text-sage" />
+      <Sprig className="mx-auto mb-4 h-4 w-20 text-silver" />
       <h2 className="font-serif text-4xl text-ink sm:text-5xl">{children}</h2>
     </div>
   );
@@ -17,12 +17,12 @@ export default function Home() {
     <main className="min-h-screen">
       {/* Hero */}
       <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
-        <LeafArch className="h-20 w-40 text-sage sm:h-24 sm:w-48" />
+        <LeafArch className="h-20 w-40 text-silver sm:h-24 sm:w-48" />
         <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-ink min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
           <span className="block whitespace-nowrap">
             {COUPLE.first} {COUPLE.firstSurname}
           </span>
-          <span className="my-3 block text-3xl italic text-sage sm:text-4xl">&amp;</span>
+          <span className="my-3 block text-3xl italic text-silver sm:text-4xl">&amp;</span>
           <span className="block whitespace-nowrap">
             {COUPLE.second} {COUPLE.secondSurname}
           </span>
@@ -39,7 +39,7 @@ export default function Home() {
         </p>
         <a
           href="#rsvp"
-          className="mt-10 inline-block rounded-full bg-sage px-9 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:-translate-y-0.5 hover:bg-sage-dark"
+          className="mt-10 inline-block rounded-full bg-plum px-9 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:-translate-y-0.5 hover:bg-plum-dark"
         >
           RSVP
         </a>
@@ -54,10 +54,10 @@ export default function Home() {
       <section className="px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-xl">
           <SectionTitle>The Day</SectionTitle>
-          <ol className="divide-y divide-sage-light border-y border-sage-light">
+          <ol className="divide-y divide-mauve-light border-y border-mauve-light">
             {EVENTS.map((ev) => (
               <li key={ev.key} className="flex items-baseline gap-5 px-2 py-5">
-                <span className="w-20 shrink-0 text-sm font-semibold tracking-wide text-sage">{ev.time}</span>
+                <span className="w-20 shrink-0 text-sm font-semibold tracking-wide text-plum">{ev.time}</span>
                 <span>
                   <span className="block font-serif text-2xl text-ink">{ev.name}</span>
                   <span className="block text-ink/60">{ev.venue}</span>
@@ -82,7 +82,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-sage">
+      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-plum">
         {COUPLE_FULL} · {WEDDING_DATE_NUMERIC}
       </footer>
     </main>

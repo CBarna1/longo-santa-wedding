@@ -7,8 +7,8 @@ import { EVENTS, WEDDING_START_ISO, type EventKey } from "@/lib/event";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const inputClass =
-  "w-full rounded-xl border border-sage-light bg-white px-4 py-3 text-ink placeholder:text-ink/40 " +
-  "transition focus:border-sage focus:outline-none focus:ring-2 focus:ring-sage/20";
+  "w-full rounded-xl border border-mauve-light bg-white px-4 py-3 text-ink placeholder:text-ink/40 " +
+  "transition focus:border-plum focus:outline-none focus:ring-2 focus:ring-plum/20";
 const labelClass = "mb-2 block text-sm tracking-wide text-ink/80";
 
 export default function RSVPForm() {
@@ -79,8 +79,8 @@ export default function RSVPForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-3xl border border-sage-light bg-white px-6 py-14 text-center shadow-sm" role="status">
-        <p className="font-serif text-4xl text-sage">Thank you! 💌</p>
+      <div className="rounded-3xl border border-mauve-light bg-white px-6 py-14 text-center shadow-sm" role="status">
+        <p className="font-serif text-4xl text-plum">Thank you! 💌</p>
         <p className="mx-auto mt-4 max-w-sm text-ink/70">
           {attending
             ? "We can't wait to celebrate with you. A confirmation is on its way to your inbox."
@@ -92,8 +92,8 @@ export default function RSVPForm() {
 
   if (closed) {
     return (
-      <div className="rounded-3xl border border-sage-light bg-white px-6 py-14 text-center shadow-sm" role="status">
-        <p className="font-serif text-3xl text-sage">RSVPs are now closed</p>
+      <div className="rounded-3xl border border-mauve-light bg-white px-6 py-14 text-center shadow-sm" role="status">
+        <p className="font-serif text-3xl text-plum">RSVPs are now closed</p>
         <p className="mx-auto mt-4 max-w-sm text-ink/70">Thank you to everyone who celebrated with us.</p>
       </div>
     );
@@ -104,7 +104,7 @@ export default function RSVPForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 rounded-3xl border border-sage-light bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10"
+      className="space-y-6 rounded-3xl border border-mauve-light bg-white px-6 py-8 shadow-sm sm:px-10 sm:py-10"
     >
       <div>
         <label htmlFor="name" className={labelClass}>Full Name</label>
@@ -130,11 +130,11 @@ export default function RSVPForm() {
               <label
                 key={opt.label}
                 className={`flex cursor-pointer items-center gap-3 rounded-xl border px-4 py-3 transition ${
-                  selected ? "border-sage bg-sage/10 text-ink" : "border-sage-light text-ink/70 hover:border-sage/60 hover:bg-paper"
+                  selected ? "border-plum bg-plum/10 text-ink" : "border-mauve-light text-ink/70 hover:border-plum/60 hover:bg-paper"
                 }`}
               >
                 <input type="radio" name="attending" required checked={selected}
-                  onChange={() => setAttending(opt.value)} className="h-4 w-4 accent-sage" />
+                  onChange={() => setAttending(opt.value)} className="h-4 w-4 accent-plum" />
                 <span className="font-serif text-xl">{opt.label}</span>
               </label>
             );
@@ -151,12 +151,12 @@ export default function RSVPForm() {
                 <label
                   key={ev.key}
                   className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 transition ${
-                    events[ev.key] ? "border-sage bg-sage/10" : "border-sage-light hover:border-sage/60 hover:bg-paper"
+                    events[ev.key] ? "border-plum bg-plum/10" : "border-mauve-light hover:border-plum/60 hover:bg-paper"
                   }`}
                 >
                   <input type="checkbox" checked={events[ev.key]}
                     onChange={(e) => setEvents((prev) => ({ ...prev, [ev.key]: e.target.checked }))}
-                    className="mt-1 h-4 w-4 accent-sage" />
+                    className="mt-1 h-4 w-4 accent-plum" />
                   <span>
                     <span className="block font-serif text-xl text-ink">{ev.name}</span>
                     <span className="block text-sm text-ink/60">{ev.time} · {ev.venue}</span>
@@ -201,13 +201,13 @@ export default function RSVPForm() {
       </div>
 
       {status === "error" && error && (
-        <p className="rounded-xl bg-sage/10 px-4 py-3 text-sm text-sage-dark" role="alert">{error}</p>
+        <p className="rounded-xl bg-plum/10 px-4 py-3 text-sm text-plum-dark" role="alert">{error}</p>
       )}
 
       <button
         type="submit"
         disabled={submitting}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-sage px-6 py-4 text-sm uppercase tracking-[0.25em] text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-sage-dark hover:shadow-md disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
+        className="flex w-full items-center justify-center gap-2 rounded-full bg-plum px-6 py-4 text-sm uppercase tracking-[0.25em] text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-plum-dark hover:shadow-md disabled:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {submitting && <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden />}
         {submitting ? "Sending…" : "Send RSVP"}

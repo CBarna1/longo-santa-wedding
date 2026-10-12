@@ -21,7 +21,7 @@ export default function Countdown() {
   if (!left) return <div className="h-[8.25rem]" aria-hidden />;
 
   if (left.done) {
-    return <p className="flex h-[8.25rem] items-center justify-center font-serif text-4xl italic text-sage">Just married!</p>;
+    return <p className="flex h-[8.25rem] items-center justify-center font-serif text-4xl italic text-plum">Just married!</p>;
   }
 
   const units = [
@@ -32,13 +32,13 @@ export default function Countdown() {
 
   return (
     <div className="h-[8.25rem]">
-      <p className="mb-5 text-center text-xs uppercase tracking-[0.3em] text-sage">Counting down</p>
+      <p className="mb-5 text-center text-xs uppercase tracking-[0.3em] text-plum">Counting down</p>
       <div className="mx-auto flex max-w-sm justify-center gap-2 sm:gap-6" role="timer" aria-label="Time until the wedding">
         {units.map((u) => (
           // w-20 on small phones: three w-24 boxes don't fit a 320px screen.
-          <div key={u.label} className="w-20 rounded-2xl border border-sage-light bg-white/70 py-3 text-center sm:w-24">
+          <div key={u.label} className="w-20 rounded-2xl border border-mauve-light bg-white/70 py-3 text-center sm:w-24">
             <div className="font-serif text-4xl leading-none text-ink">{u.value}</div>
-            <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-sage sm:text-[11px] sm:tracking-[0.25em]">{u.label}</div>
+            <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-plum sm:text-[11px] sm:tracking-[0.25em]">{u.label}</div>
           </div>
         ))}
       </div>
