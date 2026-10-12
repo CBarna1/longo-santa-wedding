@@ -6,7 +6,7 @@ create table if not exists public.rsvps_longo_santa (
   name                 text not null,
   email                text not null,
   attending            boolean not null,
-  guest_count          int default 1,
+  guest_count          int not null default 1,
   blessing             boolean not null default false,
   reception            boolean not null default false,
   dietary_restrictions text,
@@ -20,8 +20,9 @@ create table if not exists public.rsvps_longo_santa (
   constraint rsvps_ls_guest_count check (guest_count between 1 and 10),
   constraint rsvps_ls_dietary_len check (dietary_restrictions is null or char_length(dietary_restrictions) <= 2000),
   constraint rsvps_ls_message_len check (message is null or char_length(message) <= 2000),
-  -- An accepting guest must pick at least one event.
-  constraint rsvps_ls_events      check (not attending or blessing or reception)
+  -- An accepting guest must pick at least one event; a declining guest picks none.
+  constraint rsvps_ls_events      check (not attending or blessing or reception),
+  constraint rsvps_ls_decline     check (attending or (not blessing and not reception))
 );
 
 alter table public.rsvps_longo_santa enable row level security;

@@ -43,7 +43,8 @@ export function parseRsvp(body: unknown): ParseResult {
   if (!body || typeof body !== "object") return { ok: false, error: "Invalid request body." };
   const b = body as Record<string, unknown>;
 
-  const name = typeof b.name === "string" ? b.name.trim() : "";
+  // Collapse line breaks and repeated spaces: names appear in email subjects.
+  const name = typeof b.name === "string" ? b.name.replace(/\s+/g, " ").trim() : "";
   const email = typeof b.email === "string" ? b.email.trim().toLowerCase() : "";
 
   if (!name) return { ok: false, error: "Please enter your name." };
@@ -60,12 +61,21 @@ export function parseRsvp(body: unknown): ParseResult {
   let blessing = false;
   let reception = false;
   if (attending) {
-    guestCount = b.guest_count === undefined ? 1 : Number(b.guest_count);
-    if (b.guest_count === "" || !Number.isInteger(guestCount) || guestCount < 1 || guestCount > LIMITS.maxGuests) {
+    // Only real numbers or plain digit strings ("3"); Number() alone would
+    // also accept true, [3], "1e1" and "0x3".
+    const raw = b.guest_count;
+    if (raw === undefined) guestCount = 1;
+    else if (typeof raw === "number") guestCount = raw;
+    else if (typeof raw === "string" && /^\d+$/.test(raw)) guestCount = Number(raw);
+    else guestCount = NaN;
+    if (!Number.isInteger(guestCount) || guestCount < 1 || guestCount > LIMITS.maxGuests) {
       return { ok: false, error: `Number of guests must be between 1 and ${LIMITS.maxGuests}.` };
     }
-    blessing = b.blessing === true;
-    reception = b.reception === true;
+    if (typeof b.blessing !== "boolean" || typeof b.reception !== "boolean") {
+      return { ok: false, error: "Please choose which events you will attend." };
+    }
+    blessing = b.blessing;
+    reception = b.reception;
     if (!blessing && !reception) {
       return { ok: false, error: "Please choose at least one event to attend." };
     }

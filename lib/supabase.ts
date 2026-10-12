@@ -5,7 +5,7 @@ import { createClient, type SupabaseClient } from "@supabase/supabase-js";
  * Server-side Supabase client using the PUBLISHABLE (anon) key only.
  *
  * Security model:
- * - RLS is enabled on `rsvps` with a single INSERT policy for `anon`.
+ * - RLS is enabled on `rsvps_longo_santa` with a single INSERT policy for `anon`.
  * - There is no SELECT policy, so this key can add RSVPs but can never
  *   read the guest list back.
  * - The secret key (sb_secret_...) is never used anywhere in this app.

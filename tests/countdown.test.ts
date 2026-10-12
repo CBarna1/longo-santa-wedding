@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { getTimeLeft } from "../lib/countdown.ts";
+import { getTimeLeft, isRsvpOpen } from "../lib/countdown.ts";
 import { WEDDING_START_ISO } from "../lib/event.ts";
 
 const target = Date.parse(WEDDING_START_ISO);
@@ -25,4 +25,10 @@ test("exactly at the target it is done", () => {
 
 test("after the target it stays done", () => {
   assert.equal(getTimeLeft(target, target + 5 * 24 * 60 * MIN).done, true);
+});
+
+test("RSVPs are open before the wedding starts and closed from then on", () => {
+  assert.equal(isRsvpOpen(target, target - 1), true);
+  assert.equal(isRsvpOpen(target, target), false);
+  assert.equal(isRsvpOpen(target, target + MIN), false);
 });

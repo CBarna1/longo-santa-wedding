@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
-import { EVENTS, type EventKey } from "@/lib/event";
+import { useEffect, useState, type FormEvent } from "react";
+import { isRsvpOpen } from "@/lib/countdown";
+import { EVENTS, WEDDING_START_ISO, type EventKey } from "@/lib/event";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -21,6 +22,12 @@ export default function RSVPForm() {
   const [website, setWebsite] = useState(""); // honeypot: stays empty for real guests
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  // The page is static, so check the clock in the browser after mounting.
+  const [closed, setClosed] = useState(false);
+
+  useEffect(() => {
+    setClosed(!isRsvpOpen(Date.parse(WEDDING_START_ISO), Date.now()));
+  }, []);
 
   function fail(msg: string) {
     setError(msg);
@@ -79,6 +86,15 @@ export default function RSVPForm() {
             ? "We can't wait to celebrate with you. A confirmation is on its way to your inbox."
             : "We'll miss you dearly. Thank you for letting us know."}
         </p>
+      </div>
+    );
+  }
+
+  if (closed) {
+    return (
+      <div className="rounded-3xl border border-sage-light bg-white px-6 py-14 text-center shadow-sm" role="status">
+        <p className="font-serif text-3xl text-sage">RSVPs are now closed</p>
+        <p className="mx-auto mt-4 max-w-sm text-ink/70">Thank you to everyone who celebrated with us.</p>
       </div>
     );
   }

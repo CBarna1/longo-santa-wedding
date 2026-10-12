@@ -36,7 +36,6 @@ export default function Home() {
 
       {/* Countdown */}
       <section className="px-4 pb-20">
-        <p className="mb-5 text-center text-xs uppercase tracking-[0.3em] text-sage">Counting down</p>
         <Countdown />
       </section>
 

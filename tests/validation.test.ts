@@ -88,3 +88,25 @@ test("honeypot: a filled hidden 'website' field marks the request as spam", () =
   assert.equal(isSpam(base), false);
   assert.equal(isSpam(null), false);
 });
+
+test("collapses runs of whitespace and line breaks inside names", () => {
+  assert.equal(ok({ ...base, name: "Jane\n\n   Banda\t Mwale" }).name, "Jane Banda Mwale");
+});
+
+test("guest_count only accepts whole numbers or digit strings", () => {
+  for (const bad of [true, [3], "1e1", "0x3", " 3", null]) {
+    assert.match(err({ ...base, guest_count: bad }), /between 1 and 10/, `accepted ${JSON.stringify(bad)}`);
+  }
+  assert.equal(ok({ ...base, guest_count: 3 }).guest_count, 3);
+});
+
+test("an attending guest's event choices must be true/false", () => {
+  assert.match(err({ ...base, blessing: "true" }), /event/i);
+  assert.match(err({ ...base, reception: undefined }), /event/i);
+});
+
+test("a declining guest's event values are ignored, whatever their type", () => {
+  const d = ok({ ...base, attending: false, blessing: "yes", reception: 1 });
+  assert.equal(d.blessing, false);
+  assert.equal(d.reception, false);
+});

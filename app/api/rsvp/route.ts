@@ -4,7 +4,8 @@ import { sendMail } from "@/lib/mailer";
 import { isSpam, parseRsvp } from "@/lib/validation";
 import { createRateLimiter } from "@/lib/rateLimit";
 import { attendingEmail, declinedEmail, notifyCoupleEmail } from "@/lib/emails";
-import { COUPLE, WEDDING_DATE_SHORT } from "@/lib/event";
+import { isRsvpOpen } from "@/lib/countdown";
+import { COUPLE, WEDDING_DATE_SHORT, WEDDING_START_ISO } from "@/lib/event";
 
 // Nodemailer needs the Node.js runtime (not Edge).
 export const runtime = "nodejs";
@@ -19,7 +20,14 @@ const mark = (v: boolean) => (v ? "✓" : "✗");
 // submissions per IP. Generous enough for a family sharing one Wi-Fi.
 const allowRequest = createRateLimiter(10, 10 * 60_000);
 
+/** Shown for any database failure; the real error is only logged server-side. */
+const SAVE_FAILED = "We couldn't save your RSVP. Please try again later.";
+
 export async function POST(request: Request) {
+  if (!isRsvpOpen(Date.parse(WEDDING_START_ISO), Date.now())) {
+    return NextResponse.json({ success: false, error: "RSVPs are now closed." }, { status: 403 });
+  }
+
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
   if (!allowRequest(ip)) {
     return NextResponse.json(
@@ -54,12 +62,11 @@ export async function POST(request: Request) {
     const { error } = await getSupabase().from(TABLE).insert(rsvp);
     if (error) {
       console.error("[rsvp] Supabase insert failed:", error);
-      return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+      return NextResponse.json({ success: false, error: SAVE_FAILED }, { status: 500 });
     }
   } catch (err) {
     console.error("[rsvp] Supabase client error:", err);
-    const message = err instanceof Error ? err.message : "Database error.";
-    return NextResponse.json({ success: false, error: message }, { status: 500 });
+    return NextResponse.json({ success: false, error: SAVE_FAILED }, { status: 500 });
   }
 
   // 2. Send emails. The RSVP is already saved, so failures are logged, not

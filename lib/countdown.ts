@@ -6,6 +6,11 @@ export interface TimeLeft {
   done: boolean;
 }
 
+/** RSVPs close when the wedding starts. */
+export function isRsvpOpen(targetMs: number, nowMs: number): boolean {
+  return nowMs < targetMs;
+}
+
 /**
  * Pure so it can be unit-tested with fixed timestamps.
  * Partial minutes round up, so the display never reads "0 minutes" early.

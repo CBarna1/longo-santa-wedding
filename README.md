@@ -43,6 +43,9 @@ It creates `rsvps_longo_santa`, adds validation constraints, enables RLS with
 an insert-only policy for `anon`, and adds **no SELECT policy** (the guest list
 is private; view it in **Table Editor**).
 
+If the table was created before 12 Oct 2026, also run
+[`supabase/2026-10-12-tighten-constraints.sql`](supabase/2026-10-12-tighten-constraints.sql) once.
+
 ## Deploy to Vercel
 
 1. Push to GitHub, then import the repo at <https://vercel.com/new>.
@@ -55,4 +58,9 @@ is private; view it in **Table Editor**).
 
 - Emails may land in Spam for new recipients; ask guests to check Spam and
   click "Not spam".
-- Duplicate RSVPs are allowed (a guest may update their reply).
+- Duplicate RSVPs are allowed: a guest who submits again (for example to change
+  their reply) creates a new row and a new notification. When counting guests,
+  use each person's most recent row (sort Table Editor by `created_at`).
+- RSVPs close automatically at 9:00 AM on 19 December 2026 (form and API).
+- Submissions are rate-limited to 10 per connection per 10 minutes, and a
+  hidden honeypot field silently drops bot submissions.
