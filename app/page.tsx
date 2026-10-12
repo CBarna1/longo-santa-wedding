@@ -30,7 +30,7 @@ export default function Home() {
           served at full size because it is scaled to cover the screen height on phones. */}
       <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden bg-ink">
         <Image
-          src="/couple-blur.jpg"
+          src="/couple-bg.jpg"
           alt=""
           fill
           priority
