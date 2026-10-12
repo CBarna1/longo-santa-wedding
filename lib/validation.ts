@@ -29,6 +29,16 @@ function optionalText(value: unknown): string | null {
   return trimmed.length ? trimmed : null;
 }
 
+/**
+ * Honeypot check: the form has a hidden "website" field that people never see,
+ * so any value there means a bot filled it in.
+ */
+export function isSpam(body: unknown): boolean {
+  if (!body || typeof body !== "object") return false;
+  const website = (body as Record<string, unknown>).website;
+  return typeof website === "string" && website.trim().length > 0;
+}
+
 export function parseRsvp(body: unknown): ParseResult {
   if (!body || typeof body !== "object") return { ok: false, error: "Invalid request body." };
   const b = body as Record<string, unknown>;

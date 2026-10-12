@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseRsvp } from "../lib/validation.ts";
+import { isSpam, parseRsvp } from "../lib/validation.ts";
 
 const base = {
   name: "  Jane Banda ",
@@ -80,4 +80,11 @@ test("missing guest_count defaults to 1", () => {
 test("rejects over-long text fields", () => {
   assert.match(err({ ...base, message: "x".repeat(2001) }), /2000/);
   assert.match(err({ ...base, name: "x".repeat(121) }), /too long/i);
+});
+
+test("honeypot: a filled hidden 'website' field marks the request as spam", () => {
+  assert.equal(isSpam({ ...base, website: "http://spam.example" }), true);
+  assert.equal(isSpam({ ...base, website: "" }), false);
+  assert.equal(isSpam(base), false);
+  assert.equal(isSpam(null), false);
 });

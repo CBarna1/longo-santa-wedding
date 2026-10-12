@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { getSupabase } from "@/lib/supabase";
 import { sendMail } from "@/lib/mailer";
-import { parseRsvp } from "@/lib/validation";
+import { isSpam, parseRsvp } from "@/lib/validation";
+import { createRateLimiter } from "@/lib/rateLimit";
 import { attendingEmail, declinedEmail, notifyCoupleEmail } from "@/lib/emails";
 import { COUPLE, WEDDING_DATE_SHORT } from "@/lib/event";
 
@@ -14,12 +15,30 @@ const TABLE = "rsvps_longo_santa";
 const COUPLE_TEXT = `${COUPLE.first} & ${COUPLE.second}`;
 const mark = (v: boolean) => (v ? "✓" : "✗");
 
+// Each RSVP sends two emails from the shared Gmail (~500/day limit), so cap
+// submissions per IP. Generous enough for a family sharing one Wi-Fi.
+const allowRequest = createRateLimiter(10, 10 * 60_000);
+
 export async function POST(request: Request) {
+  const ip = request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
+  if (!allowRequest(ip)) {
+    return NextResponse.json(
+      { success: false, error: "Too many RSVPs from this connection. Please try again in a few minutes." },
+      { status: 429 }
+    );
+  }
+
   let body: unknown;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ success: false, error: "Invalid JSON." }, { status: 400 });
+  }
+
+  // Bots fill the hidden honeypot field. Pretend success so they don't adapt,
+  // but save nothing and send no email.
+  if (isSpam(body)) {
+    return NextResponse.json({ success: true });
   }
 
   const parsed = parseRsvp(body);

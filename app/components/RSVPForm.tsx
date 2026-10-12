@@ -18,6 +18,7 @@ export default function RSVPForm() {
   const [guestCount, setGuestCount] = useState(1);
   const [dietary, setDietary] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot: stays empty for real guests
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -49,6 +50,7 @@ export default function RSVPForm() {
           reception: attending && events.reception,
           dietary_restrictions: attending ? dietary : "",
           message,
+          website,
         }),
       });
       const data = await res.json().catch(() => ({}));
@@ -173,6 +175,13 @@ export default function RSVPForm() {
         </label>
         <textarea id="message" rows={4} maxLength={2000} value={message}
           onChange={(e) => setMessage(e.target.value)} className={`${inputClass} resize-y`} placeholder="Share your well wishes…" />
+      </div>
+
+      {/* Honeypot: hidden from people and screen readers; bots tend to fill it. */}
+      <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" type="text" tabIndex={-1} autoComplete="off" value={website}
+          onChange={(e) => setWebsite(e.target.value)} />
       </div>
 
       {status === "error" && error && (
