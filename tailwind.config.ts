@@ -12,6 +12,16 @@ const config: Config = {
         paper: "#f9f6f1",
         ink: "#27142c",
       },
+      keyframes: {
+        // Slow Ken Burns-style zoom and pan for the background photo.
+        drift: {
+          "0%": { transform: "scale(1.08) translate(0, 0)" },
+          "100%": { transform: "scale(1.22) translate(-2%, -3%)" },
+        },
+      },
+      animation: {
+        drift: "drift 30s ease-in-out infinite alternate",
+      },
       fontFamily: {
         serif: ["var(--font-serif)", "Georgia", "Cambria", "Times New Roman", "serif"],
         sans: ["var(--font-sans)", "system-ui", "-apple-system", "Segoe UI", "Roboto", "sans-serif"],

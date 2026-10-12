@@ -17,28 +17,30 @@ import {
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
     <div className="mb-8 text-center">
-      <Sprig className="mx-auto mb-4 h-4 w-20 text-silver" />
-      <h2 className="font-serif text-4xl text-ink sm:text-5xl">{children}</h2>
+      <Sprig className="mx-auto mb-4 h-4 w-20 text-mauve" />
+      <h2 className="font-serif text-4xl text-paper sm:text-5xl">{children}</h2>
     </div>
   );
 }
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="relative isolate min-h-screen">
+      {/* Full-page photo background: fixed behind everything, slowly drifting. Pre-blurred file. */}
+      <div aria-hidden="true" className="fixed inset-0 -z-10 overflow-hidden bg-ink">
+        <Image
+          src="/couple-blur.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="animate-drift object-cover object-[50%_15%] motion-reduce:animate-none"
+        />
+        <div className="absolute inset-0 bg-ink/60" />
+      </div>
+
       {/* Hero */}
-      <section className="relative isolate flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 py-20 text-center">
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
-          <Image
-            src="/couple.jpg"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="scale-110 object-cover object-[50%_15%] blur-[3px]"
-          />
-          <div className="absolute inset-0 bg-ink/60" />
-        </div>
+      <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
         <LeafArch className="h-20 w-40 text-mauve sm:h-24 sm:w-48" />
         <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-paper min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
           <span className="block whitespace-nowrap">
@@ -76,7 +78,7 @@ export default function Home() {
       <section className="px-4 pb-20 sm:px-6">
         <div className="mx-auto max-w-xl">
           <SectionTitle>The Day</SectionTitle>
-          <ol className="divide-y divide-mauve-light border-y border-mauve-light">
+          <ol className="divide-y divide-mauve-light rounded-3xl bg-paper/95 px-4 shadow-lg">
             {EVENTS.map((ev) => (
               <li key={ev.key} className="flex items-baseline gap-5 px-2 py-5">
                 <span className="w-20 shrink-0 text-sm font-semibold tracking-wide text-plum">{ev.time}</span>
@@ -93,20 +95,22 @@ export default function Home() {
       {/* Dress code */}
       <section id="dress-code" className="scroll-mt-8 px-4 pb-20 text-center">
         <SectionTitle>Dress Code</SectionTitle>
-        <p className="font-serif text-2xl italic text-ink/80 sm:text-3xl">{DRESS_CODE}</p>
-        <p className="mt-3 text-sm tracking-wide text-ink/70">{DRESS_CODE_COLORS}</p>
-        <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
-          {DRESS_CODE_SWATCHES.map((s) => (
-            <li key={s.name} className="flex flex-col items-center">
-              <span
-                className="h-20 w-20 rounded-full shadow-sm ring-1 ring-ink/10 sm:h-24 sm:w-24"
-                style={{ background: `radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.12), transparent 60%), ${s.hex}` }}
-                aria-hidden="true"
-              />
-              <span className="mt-3 text-sm text-ink/80">{s.name}</span>
-            </li>
-          ))}
-        </ul>
+        <div className="mx-auto max-w-3xl rounded-3xl bg-paper/95 px-6 py-10 shadow-lg">
+          <p className="font-serif text-2xl italic text-ink/80 sm:text-3xl">{DRESS_CODE}</p>
+          <p className="mt-3 text-sm tracking-wide text-ink/70">{DRESS_CODE_COLORS}</p>
+          <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+            {DRESS_CODE_SWATCHES.map((s) => (
+              <li key={s.name} className="flex flex-col items-center">
+                <span
+                  className="h-20 w-20 rounded-full shadow-sm ring-1 ring-ink/10 sm:h-24 sm:w-24"
+                  style={{ background: `radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.12), transparent 60%), ${s.hex}` }}
+                  aria-hidden="true"
+                />
+                <span className="mt-3 text-sm text-ink/80">{s.name}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* RSVP */}
@@ -117,7 +121,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-plum">
+      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-paper/85">
         {COUPLE_FULL} · {WEDDING_DATE_NUMERIC}
       </footer>
     </main>
