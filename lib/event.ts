@@ -4,7 +4,13 @@
  * Dependency-free so it can be imported directly by `node --test`.
  */
 
-export const COUPLE = { first: "Longo", second: "Santa", initials: "L & S" } as const;
+export const COUPLE = {
+  first: "Longo",
+  firstSurname: "Sinyinza",
+  second: "Santa",
+  secondSurname: "Jinaina",
+  initials: "L & S",
+} as const;
 
 export const WEDDING_DATE_LABEL = "Saturday · 19 December 2026";
 export const WEDDING_DATE_SHORT = "19 December 2026";
