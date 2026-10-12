@@ -23,8 +23,15 @@ export default function Home() {
           <span className="my-2 block text-3xl italic text-sage sm:text-4xl">and</span>
           {COUPLE.second}
         </h1>
+        <p className="mt-8 max-w-md font-serif text-xl italic leading-relaxed text-ink/80 sm:text-2xl">
+          Invite you to share in the joy of their wedding day celebration as they begin this beautiful
+          chapter together.
+        </p>
         <p className="mt-8 text-xs uppercase tracking-[0.3em] text-ink/70 sm:text-sm">
           {WEDDING_DATE_LABEL} · {CITY}
+        </p>
+        <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
+          This special occasion is reserved for adults only, and the couple kindly request your understanding.
         </p>
         <a
           href="#rsvp"
