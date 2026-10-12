@@ -1,3 +1,4 @@
+import Image from "next/image";
 import RSVPForm from "./components/RSVPForm";
 import Countdown from "./components/Countdown";
 import { LeafArch, Sprig } from "./components/Leaves";
@@ -26,30 +27,41 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero */}
-      <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
-        <LeafArch className="h-20 w-40 text-silver sm:h-24 sm:w-48" />
-        <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-ink min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
+      <section className="relative isolate flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-6 py-20 text-center">
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <Image
+            src="/couple.jpg"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="scale-110 object-cover object-[50%_15%] blur-[3px]"
+          />
+          <div className="absolute inset-0 bg-ink/60" />
+        </div>
+        <LeafArch className="h-20 w-40 text-mauve sm:h-24 sm:w-48" />
+        <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-paper min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
           <span className="block whitespace-nowrap">
             {COUPLE.first} {COUPLE.firstSurname}
           </span>
-          <span className="my-3 block text-3xl italic text-silver sm:text-4xl">&amp;</span>
+          <span className="my-3 block text-3xl italic text-mauve sm:text-4xl">&amp;</span>
           <span className="block whitespace-nowrap">
             {COUPLE.second} {COUPLE.secondSurname}
           </span>
         </h1>
-        <p className="mt-8 max-w-md font-serif text-xl italic leading-relaxed text-ink/80 sm:text-2xl">
+        <p className="mt-8 max-w-md font-serif text-xl italic leading-relaxed text-paper/90 sm:text-2xl">
           Invite you to share in the joy of their wedding day celebration as they begin this beautiful
           chapter together.
         </p>
-        <p className="mt-8 text-xs uppercase tracking-[0.3em] text-ink/70 sm:text-sm">
+        <p className="mt-8 text-xs uppercase tracking-[0.3em] text-paper/85 sm:text-sm">
           {WEDDING_DATE_LABEL} · {CITY}
         </p>
-        <p className="mt-6 max-w-sm text-sm leading-relaxed text-ink/60">
+        <p className="mt-6 max-w-sm text-sm leading-relaxed text-paper/80">
           This special occasion is reserved for adults only, and the couple kindly request your understanding.
         </p>
         <a
           href="#rsvp"
-          className="mt-10 inline-block rounded-full bg-plum px-9 py-3 text-sm uppercase tracking-[0.25em] text-white transition hover:-translate-y-0.5 hover:bg-plum-dark"
+          className="mt-10 inline-block rounded-full bg-paper px-9 py-3 text-sm uppercase tracking-[0.25em] text-plum transition hover:-translate-y-0.5 hover:bg-mauve-light"
         >
           RSVP
         </a>
