@@ -18,12 +18,14 @@ export default function Home() {
       {/* Hero */}
       <section className="flex min-h-[85vh] flex-col items-center justify-center px-6 py-20 text-center">
         <LeafArch className="h-20 w-40 text-sage sm:h-24 sm:w-48" />
-        <h1 className="mt-6 font-serif text-6xl font-normal leading-[0.95] text-ink sm:text-8xl">
-          {COUPLE.first}
-          <span className="block text-4xl sm:text-6xl">{COUPLE.firstSurname}</span>
-          <span className="my-3 block text-3xl italic text-sage sm:text-4xl">and</span>
-          {COUPLE.second}
-          <span className="block text-4xl sm:text-6xl">{COUPLE.secondSurname}</span>
+        <h1 className="mt-6 font-serif text-4xl font-normal leading-[0.95] text-ink min-[360px]:text-5xl sm:text-7xl lg:text-8xl">
+          <span className="block whitespace-nowrap">
+            {COUPLE.first} {COUPLE.firstSurname}
+          </span>
+          <span className="my-3 block text-3xl italic text-sage sm:text-4xl">&amp;</span>
+          <span className="block whitespace-nowrap">
+            {COUPLE.second} {COUPLE.secondSurname}
+          </span>
         </h1>
         <p className="mt-8 max-w-md font-serif text-xl italic leading-relaxed text-ink/80 sm:text-2xl">
           Invite you to share in the joy of their wedding day celebration as they begin this beautiful
