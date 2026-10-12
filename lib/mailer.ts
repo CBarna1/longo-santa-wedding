@@ -1,5 +1,6 @@
 import "server-only";
 import nodemailer, { type Transporter } from "nodemailer";
+import { COUPLE_FULL } from "./event.ts";
 
 /**
  * Gmail transport authenticated with a Google App Password.
@@ -35,7 +36,7 @@ export interface SendMailOptions {
 /** Send a single HTML email from the wedding Gmail account. */
 export async function sendMail({ to, subject, html, replyTo }: SendMailOptions) {
   return getTransporter().sendMail({
-    from: `"Longo & Santa Wedding" <${process.env.GMAIL_USER}>`,
+    from: `"${COUPLE_FULL} Wedding" <${process.env.GMAIL_USER}>`,
     to,
     subject,
     html,

@@ -5,7 +5,7 @@ import { isSpam, parseRsvp } from "@/lib/validation";
 import { createRateLimiter } from "@/lib/rateLimit";
 import { attendingEmail, declinedEmail, notifyCoupleEmail } from "@/lib/emails";
 import { isRsvpOpen } from "@/lib/countdown";
-import { COUPLE, WEDDING_DATE_SHORT, WEDDING_START_ISO } from "@/lib/event";
+import { COUPLE_FULL, WEDDING_DATE_SHORT, WEDDING_START_ISO } from "@/lib/event";
 
 // Nodemailer needs the Node.js runtime (not Edge).
 export const runtime = "nodejs";
@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 /** Separate table from the Ebenezer & Audrey site, in the same Supabase project. */
 const TABLE = "rsvps_longo_santa";
-const COUPLE_TEXT = `${COUPLE.first} & ${COUPLE.second}`;
+const COUPLE_TEXT = COUPLE_FULL;
 const mark = (v: boolean) => (v ? "✓" : "✗");
 
 // Each RSVP sends two emails from the shared Gmail (~500/day limit), so cap

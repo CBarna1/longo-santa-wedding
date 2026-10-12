@@ -1,7 +1,7 @@
 import RSVPForm from "./components/RSVPForm";
 import Countdown from "./components/Countdown";
 import { LeafArch, Sprig } from "./components/Leaves";
-import { COUPLE, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, CITY, WEDDING_DATE_NUMERIC } from "@/lib/event";
+import { COUPLE, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, CITY, WEDDING_DATE_NUMERIC } from "@/lib/event";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -80,8 +80,8 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="pb-12 text-center font-serif text-lg italic text-sage">
-        {COUPLE.initials} · {WEDDING_DATE_NUMERIC}
+      <footer className="px-4 pb-12 text-center font-serif text-lg italic text-sage">
+        {COUPLE_FULL} · {WEDDING_DATE_NUMERIC}
       </footer>
     </main>
   );

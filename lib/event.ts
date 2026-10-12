@@ -12,6 +12,8 @@ export const COUPLE = {
   initials: "L & S",
 } as const;
 
+export const COUPLE_FULL = `${COUPLE.first} ${COUPLE.firstSurname} & ${COUPLE.second} ${COUPLE.secondSurname}`;
+
 export const WEDDING_DATE_LABEL = "Saturday · 19 December 2026";
 export const WEDDING_DATE_SHORT = "19 December 2026";
 export const WEDDING_DATE_NUMERIC = "19.12.2026";

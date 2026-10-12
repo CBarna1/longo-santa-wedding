@@ -5,7 +5,7 @@
  * Table-based layout for consistent rendering across clients.
  * All user-supplied values are HTML-escaped to prevent markup injection.
  */
-import { CITY, COUPLE, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, WEDDING_DATE_SHORT, type EventKey } from "./event.ts";
+import { CITY, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, WEDDING_DATE_SHORT, type EventKey } from "./event.ts";
 
 const SAGE = "#7d9471";
 const SAGE_LIGHT = "#cdd8c6";
@@ -13,7 +13,7 @@ const PAPER = "#f4f6f1";
 const INK = "#2f3b2f";
 const SERIF = "'Cormorant Garamond', Georgia, 'Times New Roman', Times, serif";
 const SANS = "-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
-const COUPLE_HTML = `${COUPLE.first} &amp; ${COUPLE.second}`;
+const COUPLE_HTML = COUPLE_FULL.replace("&", "&amp;");
 
 /** Which events a guest chose. */
 export type EventChoice = Record<EventKey, boolean>;
