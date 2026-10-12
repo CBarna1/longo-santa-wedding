@@ -1,7 +1,17 @@
 import RSVPForm from "./components/RSVPForm";
 import Countdown from "./components/Countdown";
 import { LeafArch, Sprig } from "./components/Leaves";
-import { COUPLE, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, CITY, WEDDING_DATE_NUMERIC } from "@/lib/event";
+import {
+  CITY,
+  COUPLE,
+  COUPLE_FULL,
+  DRESS_CODE,
+  DRESS_CODE_COLORS,
+  DRESS_CODE_SWATCHES,
+  EVENTS,
+  WEDDING_DATE_LABEL,
+  WEDDING_DATE_NUMERIC,
+} from "@/lib/event";
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
   return (
@@ -69,9 +79,22 @@ export default function Home() {
       </section>
 
       {/* Dress code */}
-      <section className="px-4 pb-20 text-center">
+      <section id="dress-code" className="scroll-mt-8 px-4 pb-20 text-center">
         <SectionTitle>Dress Code</SectionTitle>
-        <p className="font-serif text-2xl italic text-ink/80">{DRESS_CODE}</p>
+        <p className="font-serif text-2xl italic text-ink/80 sm:text-3xl">{DRESS_CODE}</p>
+        <p className="mt-3 text-sm tracking-wide text-ink/70">{DRESS_CODE_COLORS}</p>
+        <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+          {DRESS_CODE_SWATCHES.map((s) => (
+            <li key={s.name} className="flex flex-col items-center">
+              <span
+                className="h-20 w-20 rounded-full shadow-sm ring-1 ring-ink/10 sm:h-24 sm:w-24"
+                style={{ background: `radial-gradient(circle at 35% 30%, rgb(255 255 255 / 0.12), transparent 60%), ${s.hex}` }}
+                aria-hidden="true"
+              />
+              <span className="mt-3 text-sm text-ink/80">{s.name}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* RSVP */}

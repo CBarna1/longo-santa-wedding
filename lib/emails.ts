@@ -5,7 +5,7 @@
  * Table-based layout for consistent rendering across clients.
  * All user-supplied values are HTML-escaped to prevent markup injection.
  */
-import { CITY, COUPLE_FULL, DRESS_CODE, EVENTS, WEDDING_DATE_LABEL, WEDDING_DATE_SHORT, type EventKey } from "./event.ts";
+import { CITY, COUPLE_FULL, DRESS_CODE, DRESS_CODE_COLORS, EVENTS, WEDDING_DATE_LABEL, WEDDING_DATE_SHORT, type EventKey } from "./event.ts";
 
 const PLUM = "#5b2a52";
 const MAUVE_LIGHT = "#e6dad8";
@@ -94,7 +94,7 @@ export function attendingEmail(
           ${eventRows}
           <tr>${label("Party")}${value(partyLabel)}</tr>
           ${dietaryRow}
-          <tr>${label("Dress")}${value(DRESS_CODE)}</tr>
+          <tr>${label("Dress")}${value(escapeHtml(`${DRESS_CODE} · ${DRESS_CODE_COLORS}`))}</tr>
         </table>
       </td></tr>
     </table>

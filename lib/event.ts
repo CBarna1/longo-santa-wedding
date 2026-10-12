@@ -18,7 +18,14 @@ export const WEDDING_DATE_LABEL = "Saturday · 19 December 2026";
 export const WEDDING_DATE_SHORT = "19 December 2026";
 export const WEDDING_DATE_NUMERIC = "19.12.2026";
 export const CITY = "Kitwe";
-export const DRESS_CODE = "Formal attire";
+export const DRESS_CODE = "Formal Daytime Elegance";
+export const DRESS_CODE_COLORS = "Plum, Mauve Champagne & Soft Silver";
+export const DRESS_CODE_SWATCHES = [
+  { name: "Deep Plum", hex: "#4a1f44" },
+  { name: "Eggplant", hex: "#27142c" },
+  { name: "Darker Silver", hex: "#847384" },
+  { name: "Mauve Champagne", hex: "#baa3a2" },
+] as const;
 
 /** Countdown target: start of the Church Blessing, Zambia time (UTC+2, no DST). */
 export const WEDDING_START_ISO = "2026-12-19T09:00:00+02:00";
